@@ -190,6 +190,9 @@ std::optional<compositionengine::LayerFE::LayerSettings> LayerFE::prepareClientC
     layerSettings.name = mSnapshot->name;
     layerSettings.luts = mSnapshot->luts ? mSnapshot->luts : targetSettings.luts;
 
+#ifdef MTK_IN_DISPLAY_FINGERPRINT
+    layerSettings.enableDither = mDither.enabled;
+#endif
     if (hasEffect() && !hasBufferOrSidebandStream()) {
         prepareEffectsClientComposition(layerSettings, targetSettings);
         return layerSettings;
